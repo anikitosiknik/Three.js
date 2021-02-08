@@ -2,17 +2,19 @@ import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import Camera from './Camera';
 import Control from './Control';
+import Mesh from './Mesh';
 import Renderer from './Renderer';
+import Scene from './Scene';
 
 function main() {
   const canvas = document.querySelector('#c') as HTMLCanvasElement;
   const camera = new Camera();
-  const scene = new THREE.Scene();
-  const renderer = new Renderer(canvas, camera.camera, scene);
+  const scene = new Scene();
+  const renderer = new Renderer(canvas, camera.camera, scene.scene);
   const controls = new Control(camera.camera, canvas);
   controls.addHandlers();
 
-  scene.background = new THREE.Color('black');
+  scene.setBackground('black');
 
   {
     const planeSize = 40;
@@ -30,9 +32,9 @@ function main() {
       map: texture,
       side: THREE.DoubleSide,
     });
-    const mesh = new THREE.Mesh(planeGeo, planeMat);
-    mesh.rotation.x = Math.PI * -0.5;
-    scene.add(mesh);
+    const plankMesh = new Mesh(planeGeo, planeMat);
+    plankMesh.setRotation(Math.PI * -0.5);
+    scene.add(plankMesh.mesh);
   }
 
   {
