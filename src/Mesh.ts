@@ -5,6 +5,7 @@ export default class Mesh {
 
     constructor(geometry: THREE.BufferGeometry, material?: THREE.Material) {
       this.#mesh = new THREE.Mesh(geometry, material);
+      this.#mesh.addEventListener('start', (e) => console.log('click'));
     }
 
     get mesh() {

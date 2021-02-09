@@ -57,7 +57,7 @@ function main() {
 
   {
     const objLoader = new OBJLoader();
-    objLoader.load('./models/table.obj', (root) => {
+    objLoader.load('./models/sofa.obj', (root) => {
       scene.add(root);
     });
   }
