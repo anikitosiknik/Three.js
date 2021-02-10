@@ -10,9 +10,9 @@ function main() {
   const canvas = document.querySelector('#c') as HTMLCanvasElement;
   const camera = new Camera();
   const scene = new Scene();
-  const renderer = new Renderer(canvas, camera.camera, scene.scene);
   const controls = new Control(camera.camera, canvas);
-  controls.addHandlers();
+  const renderer = new Renderer(canvas, camera.camera, scene.scene, controls);
+  controls.addHandlers(canvas);
 
   scene.setBackground('black');
 
@@ -57,8 +57,9 @@ function main() {
 
   {
     const objLoader = new OBJLoader();
-    objLoader.load('./models/sofa.obj', (root) => {
+    objLoader.load('./models/table.obj', (root) => {
       scene.add(root);
+      controls.copyDragList = [root];
     });
   }
 
